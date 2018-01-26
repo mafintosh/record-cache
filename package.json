@@ -1,0 +1,23 @@
+{
+  "name": "record-cache",
+  "version": "0.0.0",
+  "description": "WIP - nothing to see here",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/record-cache.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/record-cache/issues"
+  },
+  "homepage": "https://github.com/mafintosh/record-cache"
+}
