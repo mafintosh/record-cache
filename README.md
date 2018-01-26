@@ -6,6 +6,8 @@ Cache optimised for record like things like `host:port` or `domain.names`.
 npm install record-cache
 ```
 
+[![build status](https://travis-ci.org/mafintosh/record-cache.svg?branch=master)](https://travis-ci.org/mafintosh/record-cache)
+
 ## Usage
 
 ``` js
