@@ -83,7 +83,7 @@ function RecordCache (opts) {
     // 2/3 gives us a span of 0.66-1.33 maxAge or avg maxAge
     var tick = Math.ceil(2 / 3 * this.maxAge)
     this._interval = setInterval(this._gc.bind(this), tick)
-    if (this._interval) this._interval.unref()
+    if (this._interval.unref) this._interval.unref()
   }
 }
 
@@ -108,23 +108,23 @@ RecordCache.prototype.remove = function (name, record, value) {
 RecordCache.prototype.get = function (name, n) {
   var a = this._fresh.get(name)
   var b = this._stale.get(name)
-  var offset = 0
-  var len = a.length + b.length
+  var aLen = a.length
+  var bLen = b.length
+  var len = aLen + bLen
 
   if (n > len || !n) n = len
   var result = new Array(n)
 
   for (var i = 0; i < n; i++) {
-    var j = offset + Math.floor(Math.random() * (len - offset))
-    if (j < a.length) {
+    var j = Math.floor(Math.random() * (aLen + bLen))
+    if (j < aLen) {
       result[i] = a[j].record
-      swap(a, j, offset)
+      swap(a, j, --aLen)
     } else {
-      j -= a.length
+      j -= aLen
       result[i] = b[j].record
-      swap(b, j, offset)
+      swap(b, j, --bLen)
     }
-    offset++
   }
 
   return result

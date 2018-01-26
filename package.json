@@ -1,14 +1,15 @@
 {
   "name": "record-cache",
   "version": "0.0.0",
-  "description": "WIP - nothing to see here",
+  "description": "Cache optimised for record like things",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "tape": "^4.8.0"
   },
   "scripts": {
-    "test": "standard"
+    "test": "standard && tape test.js"
   },
   "repository": {
     "type": "git",

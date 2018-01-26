@@ -1,6 +1,6 @@
 # record-cache
 
-A cache optimised for record like things (`host:port`)
+Cache optimised for record like things like `host:port` or `domain.names`.
 
 ```
 npm install record-cache
