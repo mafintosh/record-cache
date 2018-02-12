@@ -79,7 +79,7 @@ function RecordCache (opts) {
   this._stale = new RecordStore()
   this._interval = null
 
-  if (this.maxAge) {
+  if (this.maxAge && this.maxAge < Infinity) {
     // 2/3 gives us a span of 0.66-1.33 maxAge or avg maxAge
     var tick = Math.ceil(2 / 3 * this.maxAge)
     this._interval = setInterval(this._gc.bind(this), tick)
