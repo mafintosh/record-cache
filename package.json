@@ -1,6 +1,6 @@
 {
   "name": "record-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cache optimised for record like things",
   "main": "index.js",
   "dependencies": {},
