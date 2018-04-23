@@ -9,7 +9,7 @@ function RecordSet () {
 
 RecordSet.prototype.add = function (record, value) {
   var k = toString(record)
-  var r = this.map.get(record)
+  var r = this.map.get(k)
   if (r) return false
 
   r = {index: this.list.length, record: value || record}
@@ -20,7 +20,7 @@ RecordSet.prototype.add = function (record, value) {
 
 RecordSet.prototype.remove = function (record) {
   var k = toString(record)
-  var r = this.map.get(record)
+  var r = this.map.get(k)
   if (!r) return false
 
   swap(this.list, r.index, this.list.length - 1)
