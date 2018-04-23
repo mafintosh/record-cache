@@ -163,3 +163,23 @@ tape('maxAge but one value is staying alive', function (t) {
     }, 35)
   }, 5)
 })
+
+tape('add dedups buffers', function (t) {
+  var rc = recordCache()
+
+  rc.add('hello', Buffer.from('world'))
+  rc.add('hello', Buffer.from('world'))
+
+  t.same(rc.get('hello'), [Buffer.from('world')])
+  t.end()
+})
+
+tape('add and remove buffer', function (t) {
+  var rc = recordCache()
+
+  rc.add('hello', Buffer.from('world'))
+  rc.remove('hello', Buffer.from('world'))
+
+  t.same(rc.get('hello'), [])
+  t.end()
+})
