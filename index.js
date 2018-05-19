@@ -74,7 +74,7 @@ function RecordCache (opts) {
 
   this.maxSize = opts.maxSize || Infinity
   this.maxAge = opts.maxAge || 0
-  this.cb = opts.cb || false
+  this.onstale = opts.onstale || false
 
   this._fresh = new RecordStore()
   this._stale = new RecordStore()
@@ -132,7 +132,7 @@ RecordCache.prototype.get = function (name, n) {
 }
 
 RecordCache.prototype._gc = function () {
-  if (this._stale.size > 0 && this.cb) this.cb(this._stale)
+  if (this._stale.size > 0 && this.onstale) this.onstale(this._stale)
   this._stale = this._fresh
   this._fresh = new RecordStore()
 }
