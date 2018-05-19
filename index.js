@@ -132,7 +132,7 @@ RecordCache.prototype.get = function (name, n) {
 }
 
 RecordCache.prototype._gc = function () {
-  if (this._stale.size > 0 && this.cb) this.cb(this._stale.records)
+  if (this._stale.size > 0 && this.cb) this.cb(this._stale)
   this._stale = this._fresh
   this._fresh = new RecordStore()
 }
