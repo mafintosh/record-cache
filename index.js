@@ -74,6 +74,7 @@ function RecordCache (opts) {
 
   this.maxSize = opts.maxSize || Infinity
   this.maxAge = opts.maxAge || 0
+  this.onStale = opts.onStale || false
 
   this._fresh = new RecordStore()
   this._stale = new RecordStore()
@@ -131,6 +132,7 @@ RecordCache.prototype.get = function (name, n) {
 }
 
 RecordCache.prototype._gc = function () {
+  if (this.onStale && this._stale.size > 0) this.onStale(this._stale)
   this._stale = this._fresh
   this._fresh = new RecordStore()
 }

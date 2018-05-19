@@ -41,12 +41,13 @@ Options include:
 ``` js
 {
   maxSize: 1000, // approximate max size
-  maxAge: 1000 // approximate max age in ms
+  maxAge: 1000, // approximate max age in ms
+  onStale: false // function called when evicting stale records
 }
 ```
 
 In the worst case the cache will be `2 * maxSize` large, and
-if maxAge is used old values are gc'ed every `0.66 * maxAge - 1.33 * maxAge`.
+if `maxAge` is used old values are gc'ed every `0.66 * maxAge - 1.33 * maxAge` with an optional callback to the `onStale` function upon record eviction.
 
 This is to greatly simplify the data structures and also gives us a pretty decent
 perf boost compared to other cache modules out there.
