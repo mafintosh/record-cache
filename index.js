@@ -79,11 +79,12 @@ function RecordCache (opts) {
   this._fresh = new RecordStore()
   this._stale = new RecordStore()
   this._interval = null
+  this._gced = false
 
   if (this.maxAge && this.maxAge < Infinity) {
     // 2/3 gives us a span of 0.66-1.33 maxAge or avg maxAge
     var tick = Math.ceil(2 / 3 * this.maxAge)
-    this._interval = setInterval(this._gc.bind(this), tick)
+    this._interval = setInterval(this._gcAuto.bind(this), tick)
     if (this._interval.unref) this._interval.unref()
   }
 }
@@ -131,10 +132,16 @@ RecordCache.prototype.get = function (name, n) {
   return result
 }
 
+RecordCache.prototype._gcAuto = function () {
+  if (!this._gced) this._gc()
+  this._gced = false
+}
+
 RecordCache.prototype._gc = function () {
   if (this._onstale && this._stale.size > 0) this._onstale(this._stale)
   this._stale = this._fresh
   this._fresh = new RecordStore()
+  this._gced = true
 }
 
 RecordCache.prototype.clear = function () {
