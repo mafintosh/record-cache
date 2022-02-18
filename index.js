@@ -1,3 +1,5 @@
+const b4a = require('b4a')
+
 var EMPTY = []
 
 module.exports = RecordCache
@@ -156,7 +158,7 @@ RecordCache.prototype.destroy = function () {
 }
 
 function toString (record) {
-  return Buffer.isBuffer(record) ? record.toString('hex') : record
+  return b4a.isBuffer(record) ? b4a.toString(record, 'hex') : record
 }
 
 function swap (list, a, b) {
