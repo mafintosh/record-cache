@@ -4,7 +4,7 @@ var EMPTY = []
 
 module.exports = RecordCache
 
-function RecordSet () {
+function RecordSet() {
   this.list = []
   this.map = new Map()
 }
@@ -14,7 +14,7 @@ RecordSet.prototype.add = function (record, value) {
   var r = this.map.get(k)
   if (r) return false
 
-  r = {index: this.list.length, record: value || record}
+  r = { index: this.list.length, record: value || record }
   this.list.push(r)
   this.map.set(k, r)
   return true
@@ -31,7 +31,7 @@ RecordSet.prototype.remove = function (record) {
   return true
 }
 
-function RecordStore () {
+function RecordStore() {
   this.records = new Map()
   this.size = 0
 }
@@ -70,7 +70,7 @@ RecordStore.prototype.get = function (name) {
   return r ? r.list : EMPTY
 }
 
-function RecordCache (opts) {
+function RecordCache(opts) {
   if (!(this instanceof RecordCache)) return new RecordCache(opts)
   if (!opts) opts = {}
 
@@ -85,7 +85,7 @@ function RecordCache (opts) {
 
   if (this.maxAge && this.maxAge < Infinity) {
     // 2/3 gives us a span of 0.66-1.33 maxAge or avg maxAge
-    var tick = Math.ceil(2 / 3 * this.maxAge)
+    var tick = Math.ceil((2 / 3) * this.maxAge)
     this._interval = setInterval(this._gcAuto.bind(this), tick)
     if (this._interval.unref) this._interval.unref()
   }
@@ -157,11 +157,11 @@ RecordCache.prototype.destroy = function () {
   this._interval = null
 }
 
-function toString (record) {
+function toString(record) {
   return b4a.isBuffer(record) ? b4a.toString(record, 'hex') : record
 }
 
-function swap (list, a, b) {
+function swap(list, a, b) {
   var tmp = list[a]
   tmp.index = b
   list[b].index = a

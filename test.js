@@ -42,12 +42,12 @@ tape('get is randomised', function (t) {
     map[rc.get('hello', 2).join('')] = true
   }
 
-  t.same(map, {ab: true, ba: true, cb: true, bc: true, ac: true, ca: true})
+  t.same(map, { ab: true, ba: true, cb: true, bc: true, ac: true, ca: true })
   t.end()
 })
 
 tape('get capped', function (t) {
-  var rc = recordCache({maxSize: 10})
+  var rc = recordCache({ maxSize: 10 })
 
   for (var i = 0; i < 50; i++) {
     rc.add('hello', '' + i)
@@ -61,7 +61,7 @@ tape('get capped', function (t) {
 })
 
 tape('get capped with many record sets', function (t) {
-  var rc = recordCache({maxSize: 10})
+  var rc = recordCache({ maxSize: 10 })
 
   for (var i = 0; i < 50; i++) {
     rc.add('' + i, 'hello')
@@ -75,7 +75,7 @@ tape('get capped with many record sets', function (t) {
 })
 
 tape('many updates is fine when capped', function (t) {
-  var rc = recordCache({maxSize: 10})
+  var rc = recordCache({ maxSize: 10 })
 
   for (var i = 0; i < 10; i++) {
     rc.add('hello', '' + i)
@@ -131,7 +131,7 @@ tape('clear', function (t) {
 })
 
 tape('maxAge', function (t) {
-  var rc = recordCache({maxAge: 20})
+  var rc = recordCache({ maxAge: 20 })
 
   rc.add('hello', 'world')
   rc.add('hello', 'verden')
@@ -146,7 +146,7 @@ tape('maxAge', function (t) {
 })
 
 tape('maxAge but one value is staying alive', function (t) {
-  var rc = recordCache({maxAge: 20})
+  var rc = recordCache({ maxAge: 20 })
 
   rc.add('hello', 'world')
   rc.add('hello', 'verden')

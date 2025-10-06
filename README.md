@@ -10,7 +10,7 @@ npm install record-cache
 
 ## Usage
 
-``` js
+```js
 var recordCache = require('record-cache')
 
 var cache = recordCache({
@@ -38,7 +38,7 @@ Create a new record cache.
 
 Options include:
 
-``` js
+```js
 {
   maxSize: 1000, // approximate max size
   maxAge: 1000, // approximate max age in ms
