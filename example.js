@@ -1,6 +1,6 @@
-const recordCache = require('./')
+const RecordCache = require('./')
 
-const rc = recordCache({
+const rc = new RecordCache({
   maxAge: 10,
   maxSize: 100
 })

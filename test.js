@@ -1,20 +1,20 @@
 const test = require('brittle')
-const recordCache = require('./')
+const RecordCache = require('./')
 
 test('add and get', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
   rc.add('hello', 'world')
   t.alike(rc.get('hello'), ['world'])
 })
 
 test('add and get buffer', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
   rc.add('hello', Buffer.from('world'))
   t.alike(rc.get('hello'), [Buffer.from('world')])
 })
 
 test('add and get (more than one)', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
   rc.add('hello', 'world')
   rc.add('hello', 'verden')
   rc.add('hello', 'welt')
@@ -27,7 +27,7 @@ test('add and get (more than one)', function (t) {
 })
 
 test('get is randomised', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   rc.add('hello', 'a')
   rc.add('hello', 'b')
@@ -43,7 +43,7 @@ test('get is randomised', function (t) {
 })
 
 test('get capped', function (t) {
-  const rc = recordCache({ maxSize: 10 })
+  const rc = new RecordCache({ maxSize: 10 })
 
   for (let i = 0; i < 50; i++) {
     rc.add('hello', '' + i)
@@ -56,7 +56,7 @@ test('get capped', function (t) {
 })
 
 test('get capped with many record sets', function (t) {
-  const rc = recordCache({ maxSize: 10 })
+  const rc = new RecordCache({ maxSize: 10 })
 
   for (let i = 0; i < 50; i++) {
     rc.add('' + i, 'hello')
@@ -69,7 +69,7 @@ test('get capped with many record sets', function (t) {
 })
 
 test('many updates is fine when capped', function (t) {
-  const rc = recordCache({ maxSize: 10 })
+  const rc = new RecordCache({ maxSize: 10 })
 
   for (let i = 0; i < 10; i++) {
     rc.add('hello', '' + i)
@@ -82,7 +82,7 @@ test('many updates is fine when capped', function (t) {
 })
 
 test('remove', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   t.alike(rc.get('hello'), [])
   rc.remove('hello', 'world')
@@ -94,7 +94,7 @@ test('remove', function (t) {
 })
 
 test('remove with other value', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   rc.add('hello', 'hi')
   t.alike(rc.get('hello'), ['hi'])
@@ -107,7 +107,7 @@ test('remove with other value', function (t) {
 })
 
 test('clear', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   rc.clear()
   t.alike(rc.get('hello'), [])
@@ -121,7 +121,7 @@ test('clear', function (t) {
 })
 
 test('maxAge', async function (t) {
-  const rc = recordCache({ maxAge: 20 })
+  const rc = new RecordCache({ maxAge: 20 })
   t.plan(2)
 
   rc.add('hello', 'world')
@@ -136,7 +136,7 @@ test('maxAge', async function (t) {
 })
 
 test('maxAge but one value is staying alive', function (t) {
-  const rc = recordCache({ maxAge: 20 })
+  const rc = new RecordCache({ maxAge: 20 })
   t.plan(2)
 
   rc.add('hello', 'world')
@@ -155,7 +155,7 @@ test('maxAge but one value is staying alive', function (t) {
 })
 
 test('add dedups buffers', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   rc.add('hello', Buffer.from('world'))
   rc.add('hello', Buffer.from('world'))
@@ -164,7 +164,7 @@ test('add dedups buffers', function (t) {
 })
 
 test('add and remove buffer', function (t) {
-  const rc = recordCache()
+  const rc = new RecordCache()
 
   rc.add('hello', Buffer.from('world'))
   rc.remove('hello', Buffer.from('world'))

@@ -11,9 +11,9 @@ npm install record-cache
 ## Usage
 
 ```js
-var recordCache = require('record-cache')
+var RecordCache = require('record-cache')
 
-var cache = recordCache({
+var cache = new RecordCache({
   maxSize: 1000 // store ~1000 values at max
   maxAge: 1000 // gc values older than ~1000ms
 })
@@ -32,7 +32,7 @@ setTimeout(function () {
 
 ## API
 
-#### `var cache = recordCache([options])`
+#### `var cache = new RecordCache([options])`
 
 Create a new record cache.
 
