@@ -7,14 +7,15 @@
     "b4a": "^1.3.1"
   },
   "devDependencies": {
+    "brittle": "^3.19.1",
+    "lunte": "^1.4.0",
     "prettier": "^3.6.2",
-    "prettier-config-holepunch": "^1.0.0",
-    "tape": "^4.8.0"
+    "prettier-config-holepunch": "^2.0.0"
   },
   "scripts": {
-    "format": "prettier --write .",
-    "lint": "prettier --check .",
-    "test": "tape test.js"
+    "format": "prettier . --write",
+    "test": "prettier . --check && lunte && brittle test.js",
+    "lint": "lunte"
   },
   "repository": {
     "type": "git",

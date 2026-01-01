@@ -1,6 +1,6 @@
 const b4a = require('b4a')
 
-var EMPTY = []
+const EMPTY = []
 
 module.exports = RecordCache
 
@@ -10,8 +10,8 @@ function RecordSet() {
 }
 
 RecordSet.prototype.add = function (record, value) {
-  var k = toString(record)
-  var r = this.map.get(k)
+  const k = toString(record)
+  let r = this.map.get(k)
   if (r) return false
 
   r = { index: this.list.length, record: value || record }
@@ -21,8 +21,8 @@ RecordSet.prototype.add = function (record, value) {
 }
 
 RecordSet.prototype.remove = function (record) {
-  var k = toString(record)
-  var r = this.map.get(k)
+  const k = toString(record)
+  const r = this.map.get(k)
   if (!r) return false
 
   swap(this.list, r.index, this.list.length - 1)
@@ -37,7 +37,7 @@ function RecordStore() {
 }
 
 RecordStore.prototype.add = function (name, record, value) {
-  var r = this.records.get(name)
+  let r = this.records.get(name)
 
   if (!r) {
     r = new RecordSet()
@@ -53,7 +53,7 @@ RecordStore.prototype.add = function (name, record, value) {
 }
 
 RecordStore.prototype.remove = function (name, record, value) {
-  var r = this.records.get(name)
+  const r = this.records.get(name)
   if (!r) return false
 
   if (r.remove(record, value)) {
@@ -66,7 +66,7 @@ RecordStore.prototype.remove = function (name, record, value) {
 }
 
 RecordStore.prototype.get = function (name) {
-  var r = this.records.get(name)
+  const r = this.records.get(name)
   return r ? r.list : EMPTY
 }
 
@@ -85,7 +85,7 @@ function RecordCache(opts) {
 
   if (this.maxAge && this.maxAge < Infinity) {
     // 2/3 gives us a span of 0.66-1.33 maxAge or avg maxAge
-    var tick = Math.ceil((2 / 3) * this.maxAge)
+    const tick = Math.ceil((2 / 3) * this.maxAge)
     this._interval = setInterval(this._gcAuto.bind(this), tick)
     if (this._interval.unref) this._interval.unref()
   }
@@ -110,17 +110,17 @@ RecordCache.prototype.remove = function (name, record, value) {
 }
 
 RecordCache.prototype.get = function (name, n) {
-  var a = this._fresh.get(name)
-  var b = this._stale.get(name)
-  var aLen = a.length
-  var bLen = b.length
-  var len = aLen + bLen
+  const a = this._fresh.get(name)
+  const b = this._stale.get(name)
+  let aLen = a.length
+  let bLen = b.length
+  const len = aLen + bLen
 
   if (n > len || !n) n = len
-  var result = new Array(n)
+  const result = new Array(n)
 
-  for (var i = 0; i < n; i++) {
-    var j = Math.floor(Math.random() * (aLen + bLen))
+  for (let i = 0; i < n; i++) {
+    let j = Math.floor(Math.random() * (aLen + bLen))
     if (j < aLen) {
       result[i] = a[j].record
       swap(a, j, --aLen)
@@ -162,7 +162,7 @@ function toString(record) {
 }
 
 function swap(list, a, b) {
-  var tmp = list[a]
+  const tmp = list[a]
   tmp.index = b
   list[b].index = a
   list[a] = list[b]
